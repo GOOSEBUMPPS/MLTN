@@ -1,0 +1,86 @@
+import time
+import os
+import sys
+import psutil
+
+# Set the window title
+os.system("title Molten.exe")
+
+# Set the text color
+os.system("color 0a")
+
+# Display the ASCII art
+print("    __  _______  __  _____________   __")
+print("   /  |/  / __ \/ / /_  __/ ____/ | / /")
+print("  / /|_/ / / / / /   / / / __/ /  |/ / ")
+print(" / /  / / /_/ / /___/ / / /___/ /|  /  ")
+print("/_/  /_/\____/_____/_/ /_____/_/ |_/   ")
+print("")
+
+# Display the loading message
+print("MOLTEN")
+
+# Simulate the update check process
+for i in range(5):
+    sys.stdout.write("\rChecking for updates... [" + "" * (i+1) + "" * (4-i) + "] " + str((i+1)*20) + "%")
+    sys.stdout.flush()
+    time.sleep(0.5)
+sys.stdout.write("\rChecking for updates... [||||] 100%\n")  # Clear the line and print the final result
+
+# Simulate the update download process
+for i in range(5):
+    sys.stdout.write("\rDownloading update... [" + "" * (i+1) + "" * (4-i) + "] " + str((i+1)*20) + "%")
+    sys.stdout.flush()
+    time.sleep(0.5)
+sys.stdout.write("\rDownloading update... [||||] 100%\n")  # Clear the line and print the final result
+
+# Simulate the update apply process
+for i in range(5):
+    sys.stdout.write("\rApplying update... [" + "" * (i+1) + "" * (4-i) + "] " + str((i+1)*20) + "%")
+    sys.stdout.flush()
+    time.sleep(0.5)
+sys.stdout.write("\rApplying update... [||||] 100%\n")  # Clear the line and print the final result
+
+print("Loading Molten.exe...")
+
+# Simulate the loading process
+for i in range(101):
+    chars = ["|", "/", "-", "\\"]
+    sys.stdout.write("\rLoading... [" + "" * (i//10) + "" * (10-(i//10)) + "] " + str(i) + "%" + " " + chars[i%4])
+    sys.stdout.flush()
+    time.sleep(0.1)
+sys.stdout.write("\rLoading... [||||||||||||||||||||||||||||||||||||||||] 100%\n")  # Clear the line and print the final result
+
+# Check if Roblox is open
+roblox_open = False
+for proc in psutil.process_iter(['pid', 'name']):
+    try:
+        if proc.info['name'] == "RobloxPlayerBeta.exe":
+            roblox_open = True
+            break
+    except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+        pass
+
+if roblox_open:
+    print("Roblox is open. Do you want to inject? (Y/N)")
+    response = input().upper()
+    if response == "Y":
+        # Simulate the injection process
+        for i in range(101):
+            chars = ["|", "/", "-", "\\"]
+            sys.stdout.write("\rInjecting... [" + "" * (i//10) + "" * (10-(i//10)) + "] " + str(i) + "%" + " " + chars[i%4])
+            sys.stdout.flush()
+            time.sleep(0.1)
+        sys.stdout.write("\rInjecting... [||||||||||||||||||||||||||||||||||||||||] 100%\n")  # Clear the line and print the final result
+        # Display the error message
+        os.system("color 0c")
+        print("\nERROR : 201 Unable to inject into Roblox")
+        print("An unexpected error occurred while attempting to inject into Roblox. Our team is working to resolve this issue as soon as possible.")
+        print("Please try again later or contact our support team for further assistance.")
+        os.system("pause")
+    else:
+        print("Injection cancelled.")
+        os.system("pause")
+else:
+    print("Roblox is not open. Please open Roblox and try again.")
+    os.system("pause")
